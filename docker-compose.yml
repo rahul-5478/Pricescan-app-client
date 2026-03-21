@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  mongo:
+    image: mongo:7
+    container_name: overpricing_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - app_net
+
+  redis:
+    image: redis:7-alpine
+    container_name: overpricing_redis
+    ports:
+      - "6379:6379"
+    networks:
+      - app_net
+
+  ai-service:
+    build: ./ai-service
+    container_name: overpricing_ai
+    env_file: ./ai-service/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    networks:
+      - app_net
+
+  server:
+    build: ./server
+    container_name: overpricing_server
+    env_file: ./server/.env
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+      - redis
+      - ai-service
+    networks:
+      - app_net
+
+  client:
+    build: ./client
+    container_name: overpricing_client
+    ports:
+      - "5173:80"
+    depends_on:
+      - server
+    networks:
+      - app_net
+
+networks:
+  app_net:
+    driver: bridge
+
+volumes:
+  mongo_data:

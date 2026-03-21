@@ -1,0 +1,51 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="112" fill="url(#bgGrad)"/>
+
+  <!-- Grid pattern -->
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#07080F"/>
+      <stop offset="100%" style="stop-color:#0D1025"/>
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00E5A0"/>
+      <stop offset="100%" style="stop-color:#00A878"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Subtle grid lines -->
+  <g opacity="0.05">
+    <line x1="0" y1="128" x2="512" y2="128" stroke="#00E5A0" stroke-width="1"/>
+    <line x1="0" y1="256" x2="512" y2="256" stroke="#00E5A0" stroke-width="1"/>
+    <line x1="0" y1="384" x2="512" y2="384" stroke="#00E5A0" stroke-width="1"/>
+    <line x1="128" y1="0" x2="128" y2="512" stroke="#00E5A0" stroke-width="1"/>
+    <line x1="256" y1="0" x2="256" y2="512" stroke="#00E5A0" stroke-width="1"/>
+    <line x1="384" y1="0" x2="384" y2="512" stroke="#00E5A0" stroke-width="1"/>
+  </g>
+
+  <!-- Ambient glow circle -->
+  <circle cx="256" cy="256" r="160" fill="rgba(0,229,160,0.06)"/>
+
+  <!-- Lightning bolt (⚡) centered -->
+  <text
+    x="256"
+    y="330"
+    text-anchor="middle"
+    font-size="240"
+    font-family="system-ui, -apple-system, sans-serif"
+    fill="url(#boltGrad)"
+    filter="url(#glow)"
+  >⚡</text>
+
+  <!-- Bottom ring accent -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="rgba(0,229,160,0.12)" stroke-width="1"/>
+  <circle cx="256" cy="256" r="220" fill="none" stroke="rgba(0,229,160,0.06)" stroke-width="1"/>
+</svg>
